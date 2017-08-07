@@ -1,2 +1,0 @@
-# aboutim.github.com
-mynote
