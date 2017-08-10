@@ -1,25 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title><![CDATA[虚拟化是什么]]></title>
-    <url>%2F2014%2F08%2F08%2Fvirtualization-evo%2F</url>
-    <content type="text"><![CDATA[引用WIKI 在计算机技术中，虚拟化（技术）或虚拟技术（英语：Virtualization）是一种资源管理技术，是将计算机的各种实体资源（CPU、内存、磁盘空间、网络适配器等），予以抽象、转换后呈现出来并可供分区、组合为一个或多个电脑配置环境。由此，打破实体结构间的不可切割的障碍，使用户可以比原本的配置更好的方式来应用这些电脑硬件资源。这些资源的新虚拟部分是不受现有资源的架设方式，地域或物理配置所限制。一般所指的虚拟化资源包括计算能力和数据存储。 虚拟化不是一个新技术，在上个世纪60年代就已经诞生了，真正在X86架构下广泛应用应该是在本世纪初由VMWare公司推出企业级vSphere 虚拟化软件产品，配合Intel 等厂商随着工艺的不断进步升级，物理服务器可以运行多个虚拟机，每个虚拟机可以负载不同的程序，极大的提高了物理服务器的资源利用率，同时也保持了程序之间隔离性。 虚拟化技术解决了什么问题虚拟化技术在那些领域中得到广泛应用选择虚拟化的思考点极大的提高资源的利用率缩减了企业的IT成本创新、先进是企业在竞争中重要的决胜关键点]]></content>
-      <categories>
-        <category>虚拟化</category>
-      </categories>
-      <tags>
-        <tag>虚拟化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[关于这里]]></title>
-    <url>%2F2014%2F07%2F13%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[记录我在IT技术的道路上探索实践中有趣的点点滴滴熟悉技能：VMWare vSphere/Horizon 安装、部署、规划、设计、管理、自动化运维 Powershell、PowerCLI、Pyhton 服务器、数据存储/管理/备份/复制等方案设计 基于VMWare环境的网络/存储/备份/灾备 有一定的研究 专注方向：云计算、虚拟化技术、数据存储与管理]]></content>
-      <categories>
-        <category>随手杂记</category>
-      </categories>
-      <tags>
-        <tag>杂记</tag>
-      </tags>
-  </entry>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[虚拟化是什么]]></title>
+      <url>/2014/08/08/virtualization-evo/</url>
+      <content type="html"><![CDATA[<h6 id="引用WIKI"><a href="#引用WIKI" class="headerlink" title="引用WIKI"></a>引用WIKI</h6><blockquote>
+<p>在计算机技术中，虚拟化（技术）或虚拟技术（英语：Virtualization）是一种资源管理技术，是将计算机的各种实体资源（CPU、内存、磁盘空间、网络适配器等），予以抽象、转换后呈现出来并可供分区、组合为一个或多个电脑配置环境。由此，打破实体结构间的不可切割的障碍，使用户可以比原本的配置更好的方式来应用这些电脑硬件资源。这些资源的新虚拟部分是不受现有资源的架设方式，地域或物理配置所限制。一般所指的虚拟化资源包括计算能力和数据存储。</p>
+</blockquote>
+<p>虚拟化不是一个新技术，在上个世纪60年代就已经诞生了，真正在X86架构下广泛应用应该是在本世纪初由VMWare公司推出企业级vSphere 虚拟化软件产品，配合Intel 等厂商随着工艺的不断进步升级，物理服务器可以运行多个虚拟机，每个虚拟机可以负载不同的程序，极大的提高了物理服务器的资源利用率，同时也保持了程序之间隔离性。</p>
+<h2 id="虚拟化技术解决了什么问题"><a href="#虚拟化技术解决了什么问题" class="headerlink" title="虚拟化技术解决了什么问题"></a>虚拟化技术解决了什么问题</h2><h2 id="虚拟化技术在那些领域中得到广泛应用"><a href="#虚拟化技术在那些领域中得到广泛应用" class="headerlink" title="虚拟化技术在那些领域中得到广泛应用"></a>虚拟化技术在那些领域中得到广泛应用</h2><h2 id="选择虚拟化的思考点"><a href="#选择虚拟化的思考点" class="headerlink" title="选择虚拟化的思考点"></a>选择虚拟化的思考点</h2><h3 id="极大的提高资源的利用率"><a href="#极大的提高资源的利用率" class="headerlink" title="极大的提高资源的利用率"></a>极大的提高资源的利用率</h3><h3 id="缩减了企业的IT成本"><a href="#缩减了企业的IT成本" class="headerlink" title="缩减了企业的IT成本"></a>缩减了企业的IT成本</h3><h3 id="创新、先进是企业在竞争中重要的决胜关键点"><a href="#创新、先进是企业在竞争中重要的决胜关键点" class="headerlink" title="创新、先进是企业在竞争中重要的决胜关键点"></a>创新、先进是企业在竞争中重要的决胜关键点</h3>]]></content>
+      
+        <categories>
+            
+            <category> 虚拟化 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 虚拟化 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[关于这里]]></title>
+      <url>/2014/07/13/hello-world/</url>
+      <content type="html"><![CDATA[<h2 id="记录我在IT技术的道路上探索实践中有趣的点点滴滴"><a href="#记录我在IT技术的道路上探索实践中有趣的点点滴滴" class="headerlink" title="记录我在IT技术的道路上探索实践中有趣的点点滴滴"></a>记录我在IT技术的道路上探索实践中有趣的点点滴滴</h2><h4 id="熟悉技能："><a href="#熟悉技能：" class="headerlink" title="熟悉技能："></a>熟悉技能：</h4><p>VMWare vSphere/Horizon 安装、部署、规划、设计、管理、自动化运维</p>
+<p>Powershell、PowerCLI、Pyhton</p>
+<p>服务器、数据存储/管理/备份/复制等方案设计</p>
+<p>基于VMWare环境的网络/存储/备份/灾备 有一定的研究</p>
+<p>专注方向：云计算、虚拟化技术、数据存储与管理</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 随手杂记 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 杂记 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
 </search>
