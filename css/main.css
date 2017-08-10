@@ -1808,7 +1808,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #a86fff;
+  background: #bf346b;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2969,12 +2969,6 @@ pre .javascript .function {
     text-align: justify;
   }
 }
-.shareuibutton {
-  display: block;
-  padding: 0.6em;
-  text-align: center;
-  cursor: pointer;
+.blackcolor {
   background: #222;
-  color: #fff;
-  font-weight: 700;
 }
