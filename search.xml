@@ -1,25 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title><![CDATA[虚拟化是什么]]></title>
-    <url>%2F2014%2F08%2F08%2Fvirtualization-evo%2F</url>
-    <content type="text"><![CDATA[引用WIKI 在计算机技术中，虚拟化（技术）或虚拟技术（英语：Virtualization）是一种资源管理技术，是将计算机的各种实体资源（CPU、内存、磁盘空间、网络适配器等），予以抽象、转换后呈现出来并可供分区、组合为一个或多个电脑配置环境。由此，打破实体结构间的不可切割的障碍，使用户可以比原本的配置更好的方式来应用这些电脑硬件资源。这些资源的新虚拟部分是不受现有资源的架设方式，地域或物理配置所限制。一般所指的虚拟化资源包括计算能力和数据存储。 虚拟化不是一个新技术，在上个世纪60年代就已经诞生了，真正在X86架构下广泛应用应该是在本世纪初由VMWare公司推出企业级vSphere 虚拟化软件产品，配合Intel 等厂商随着工艺的不断进步升级，物理服务器可以运行多个虚拟机，每个虚拟机可以负载不同的程序，极大的提高了物理服务器的资源利用率，同时也保持了程序之间隔离性。 虚拟化技术解决了什么问题虚拟化技术在那些领域中得到广泛应用选择虚拟化的思考点极大的提高资源的利用率缩减了企业的IT成本创新、先进是企业在竞争中重要的决胜关键点]]></content>
-      <categories>
-        <category>虚拟化</category>
-      </categories>
-      <tags>
-        <tag>虚拟化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[关于这里]]></title>
-    <url>%2F2014%2F07%2F13%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[记录我在IT技术的道路上探索实践中有趣的点点滴滴熟悉技能：VMWare vSphere/Horizon 安装、部署、规划、设计、管理、自动化运维 Powershell、PowerCLI、Pyhton 服务器、数据存储/管理/备份/复制等方案设计 基于VMWare环境的网络/存储/备份/灾备 有一定的研究 专注方向：云计算、虚拟化技术、数据存储与管理]]></content>
-      <categories>
-        <category>随手杂记</category>
-      </categories>
-      <tags>
-        <tag>杂记</tag>
-      </tags>
-  </entry>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[解决 vCSA 6.0 vphere-web-client-页面无法打开]]></title>
+      <url>/2016/11/15/vcsa-web-client-svc/</url>
+      <content type="html"><![CDATA[<h3 id="故障描述"><a href="#故障描述" class="headerlink" title="故障描述"></a>故障描述</h3><p>5.5 版本 VMWare 就提倡用 web-client ，但是 web-client 的响应时间以及被动刷新真的很让人捉急，因此大部分人还是喜欢用 vsphere-client for desktop 。前端发现web-client无法打开，但是：5480 后台以及引导页面还是可以打开的。也就是<a href="https://#you-vc#" target="_blank" rel="external">https://#you-vc#</a> /vsphere-client/?csp<br>初步估计是 VC 的 web 服务异常了</p>
+<h3 id="排错解决"><a href="#排错解决" class="headerlink" title="排错解决"></a>排错解决</h3><p>SSH 上去 check 一下</p>
+<pre><code>vcsa:~ # /etc/init.d/vsphere-client status
+VMware vSphere Web Client is running: PID:14701, Wrapper:STARTED, Java:STARTED
+</code></pre><p>正在运行，但页面就是打不开。<br>重启服务试试</p>
+<pre><code>vcsa:~ # /etc/init.d/vsphere-client restart
+</code></pre><p>等一分钟左右，刷新页面，登录界面出来了</p>
+<p>除此之外，遇到别的异常可考虑重启对应的功能模块来尝试解决修复</p>
+<h3 id="vCSA-服务列表"><a href="#vCSA-服务列表" class="headerlink" title="vCSA 服务列表"></a>vCSA 服务列表</h3><table>
+<thead>
+<tr>
+<th>服务名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>applmgmt</td>
+<td>VMware Appliance Management Service</td>
+</tr>
+<tr>
+<td>vmware-cis-license</td>
+<td>VMware License Service</td>
+</tr>
+<tr>
+<td>vmware-cm</td>
+<td>VMware Component Manager</td>
+</tr>
+<tr>
+<td>vmware-eam</td>
+<td>VMware ESX Agent Manager</td>
+</tr>
+<tr>
+<td>vmware-sts-idmd</td>
+<td>VMware Identity Management Service</td>
+</tr>
+<tr>
+<td>vmware-invsvc</td>
+<td>VMware Inventory Service</td>
+</tr>
+<tr>
+<td>vmware-mbcs</td>
+<td>VMware Message Bus Configuration Service</td>
+</tr>
+<tr>
+<td>vmware-netdumper</td>
+<td>VMware vSphere ESXi Dump Collector</td>
+</tr>
+<tr>
+<td>vmware-perfcharts</td>
+<td>VMware Performance Charts</td>
+</tr>
+<tr>
+<td>vmware-rbd-watchdog</td>
+<td>VMware vSphere Auto Deploy Waiter</td>
+</tr>
+<tr>
+<td>vmware-rhttpproxy</td>
+<td>VMware HTTP Reverse Proxy</td>
+</tr>
+<tr>
+<td>vmware-sca</td>
+<td>VMware Service Control Agent</td>
+</tr>
+<tr>
+<td>vmware-sps</td>
+<td>VMware vSphere Profile-Driven Storage Service</td>
+</tr>
+<tr>
+<td>vmware-stsd</td>
+<td>VMware Security Token Service</td>
+</tr>
+<tr>
+<td>vmware-syslog</td>
+<td>VMware Common Logging Service</td>
+</tr>
+<tr>
+<td>vmware-syslog-health</td>
+<td>VMware Syslog Health Service</td>
+</tr>
+<tr>
+<td>vmware-vapi-endpoint</td>
+<td>VMware vAPI Endpoint</td>
+</tr>
+<tr>
+<td>vmware-vdcs</td>
+<td>VMware Content Library Service</td>
+</tr>
+<tr>
+<td>vmafdd</td>
+<td>VMware Authentication Framework</td>
+</tr>
+<tr>
+<td>vmcad</td>
+<td>VMware Certificate Service</td>
+</tr>
+<tr>
+<td>vmdird</td>
+<td>VMware Directory Service</td>
+</tr>
+<tr>
+<td>vmware-vpostgres</td>
+<td>VMware Postgres</td>
+</tr>
+<tr>
+<td>vmware-vpx-workflow</td>
+<td>VMware vCenter Workflow Manager</td>
+</tr>
+<tr>
+<td>vmware-vpxd</td>
+<td>VMware vCenter Server</td>
+</tr>
+<tr>
+<td>vmware-vsm</td>
+<td>VMware vService Manager</td>
+</tr>
+<tr>
+<td>vsphere-client</td>
+<td>vSphere Web Client</td>
+</tr>
+<tr>
+<td>vmware-vws</td>
+<td>VMware System and Hardware Health Manager</td>
+</tr>
+<tr>
+<td>vmware-vsan-health</td>
+<td>VMware vSAN Health Service</td>
+</tr>
+</tbody>
+</table>
+<h3 id="其它命令"><a href="#其它命令" class="headerlink" title="其它命令"></a>其它命令</h3><p>运行以下命令以列出 vCenter Server Appliance 服务：</p>
+<p>service-control –list</p>
+<p>要查看 vCenter Server Appliance 服务的当前状态，请键入以下命令：</p>
+<p>service-control –status</p>
+<p>运行以下命令以启动特定服务：</p>
+<p>service-control –startservicename</p>
+<p>也可以键入以下命令启动所有服务：</p>
+<p>service-control –start –all</p>
+<p>要执行该命令的预演，请将–dry-run选项添加到该命令。此时将显示该命令将运行哪些操作，而不执行这些操作。例如，键入以下命令：</p>
+<p>service-control –start –all –dry-run</p>
+<p>运行以下命令以停止特定服务：</p>
+<p>service-control –stopservicename</p>
+<p>也可以键入以下命令停止所有服务：</p>
+<p>service-control –stop –all</p>
+<p>要执行该命令的预演，请将–dry-run选项添加到该命令。此时将显示该命令将运行哪些操作，而不执行这些操作。例如，键入以下命令：</p>
+<p>service-control –stop –all –dry-run</p>
+<p>也可以键入以下命令停止所有服务：</p>
+<p>service-control –stop –all</p>
+<p>运行以下命令以启动特定服务：</p>
+<p>service-control –startservicename</p>
+<p>也可以键入以下命令启动所有服务：</p>
+<p>service-control –start –all</p>
+<p>服务列表以及其它命令来自官方 <a href="https://kb.vmware.com/selfservice/microsites/search.do?language=en_US&amp;cmd=displayKC&amp;externalId=2115730" target="_blank" rel="external">KB2115730</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> 虚拟化 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 虚拟化 </tag>
+            
+            <tag> VCSA </tag>
+            
+            <tag> 排障 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[虚拟化是什么]]></title>
+      <url>/2014/08/08/virtualization-evo/</url>
+      <content type="html"><![CDATA[<h6 id="引用WIKI"><a href="#引用WIKI" class="headerlink" title="引用WIKI"></a>引用WIKI</h6><blockquote>
+<p>在计算机技术中，虚拟化（技术）或虚拟技术（英语：Virtualization）是一种资源管理技术，是将计算机的各种实体资源（CPU、内存、磁盘空间、网络适配器等），予以抽象、转换后呈现出来并可供分区、组合为一个或多个电脑配置环境。由此，打破实体结构间的不可切割的障碍，使用户可以比原本的配置更好的方式来应用这些电脑硬件资源。这些资源的新虚拟部分是不受现有资源的架设方式，地域或物理配置所限制。一般所指的虚拟化资源包括计算能力和数据存储。</p>
+</blockquote>
+<p>虚拟化不是一个新技术，在上个世纪60年代就已经诞生了，真正在X86架构下广泛应用应该是在本世纪初由VMWare公司推出企业级vSphere 虚拟化软件产品，配合Intel 等厂商随着工艺的不断进步升级，物理服务器可以运行多个虚拟机，每个虚拟机可以负载不同的程序，极大的提高了物理服务器的资源利用率，同时也保持了程序之间隔离性。</p>
+<h2 id="虚拟化技术解决了什么问题"><a href="#虚拟化技术解决了什么问题" class="headerlink" title="虚拟化技术解决了什么问题"></a>虚拟化技术解决了什么问题</h2><h2 id="虚拟化技术在那些领域中得到广泛应用"><a href="#虚拟化技术在那些领域中得到广泛应用" class="headerlink" title="虚拟化技术在那些领域中得到广泛应用"></a>虚拟化技术在那些领域中得到广泛应用</h2><h2 id="选择虚拟化的思考点"><a href="#选择虚拟化的思考点" class="headerlink" title="选择虚拟化的思考点"></a>选择虚拟化的思考点</h2><h3 id="极大的提高资源的利用率"><a href="#极大的提高资源的利用率" class="headerlink" title="极大的提高资源的利用率"></a>极大的提高资源的利用率</h3><h3 id="缩减了企业的IT成本"><a href="#缩减了企业的IT成本" class="headerlink" title="缩减了企业的IT成本"></a>缩减了企业的IT成本</h3><h3 id="创新、先进是企业在竞争中重要的决胜关键点"><a href="#创新、先进是企业在竞争中重要的决胜关键点" class="headerlink" title="创新、先进是企业在竞争中重要的决胜关键点"></a>创新、先进是企业在竞争中重要的决胜关键点</h3>]]></content>
+      
+        <categories>
+            
+            <category> 虚拟化 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 虚拟化 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[关于这里]]></title>
+      <url>/2014/07/13/hello-world/</url>
+      <content type="html"><![CDATA[<h2 id="记录我在IT技术的道路上探索实践中有趣的点点滴滴"><a href="#记录我在IT技术的道路上探索实践中有趣的点点滴滴" class="headerlink" title="记录我在IT技术的道路上探索实践中有趣的点点滴滴"></a>记录我在IT技术的道路上探索实践中有趣的点点滴滴</h2><h4 id="熟悉技能："><a href="#熟悉技能：" class="headerlink" title="熟悉技能："></a>熟悉技能：</h4><p>VMWare vSphere/Horizon 安装、部署、规划、设计、管理、自动化运维</p>
+<p>Powershell、PowerCLI、Pyhton</p>
+<p>服务器、数据存储/管理/备份/复制等方案设计</p>
+<p>基于VMWare环境的网络/存储/备份/灾备 有一定的研究</p>
+<p>专注方向：云计算、虚拟化技术、数据存储与管理</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 随手杂记 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 杂记 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
 </search>
