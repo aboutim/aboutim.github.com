@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="PowerCLI,VMWare运维,VMX," />
 
 
 
@@ -94,16 +94,18 @@
 
 
 
-<meta name="description" content="黎明之前最黑暗">
-<meta property="og:type" content="website">
-<meta property="og:title" content="TIM Blog">
-<meta property="og:url" content="http://yoursite.com/categories/虚拟化/index.html">
+<meta name="description" content="适合场景 存储搬迁到别的机房，VM 计划性停机，使用需要批量的把 VM 注册到新机房的计算资源池中。 适合找出没有注册到VC指定位置中的非活动 VM  思路 获取 Datastore 的信息 ，示例是获取集群内的 Datastore  1$Datastoreinfo =  Get-Datastore -Nmae &amp;apos;DatastoreName&amp;apos; | %&amp;#123;Get-View">
+<meta name="keywords" content="PowerCLI,VMWare运维,VMX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用 PowerCLI 从 Datastore 中批量获取 VMX 文件注册到 VC">
+<meta property="og:url" content="http://yoursite.com/2017/07/17/powecli-register-datastore-vmx/index.html">
 <meta property="og:site_name" content="TIM Blog">
-<meta property="og:description" content="黎明之前最黑暗">
+<meta property="og:description" content="适合场景 存储搬迁到别的机房，VM 计划性停机，使用需要批量的把 VM 注册到新机房的计算资源池中。 适合找出没有注册到VC指定位置中的非活动 VM  思路 获取 Datastore 的信息 ，示例是获取集群内的 Datastore  1$Datastoreinfo =  Get-Datastore -Nmae &amp;apos;DatastoreName&amp;apos; | %&amp;#123;Get-View">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-17T07:57:12.211Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TIM Blog">
-<meta name="twitter:description" content="黎明之前最黑暗">
+<meta name="twitter:title" content="用 PowerCLI 从 Datastore 中批量获取 VMX 文件注册到 VC">
+<meta name="twitter:description" content="适合场景 存储搬迁到别的机房，VM 计划性停机，使用需要批量的把 VM 注册到新机房的计算资源池中。 适合找出没有注册到VC指定位置中的非活动 VM  思路 获取 Datastore 的信息 ，示例是获取集群内的 Datastore  1$Datastoreinfo =  Get-Datastore -Nmae &amp;apos;DatastoreName&amp;apos; | %&amp;#123;Get-View">
 
 
 
@@ -132,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/虚拟化/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/17/powecli-register-datastore-vmx/"/>
 
 
 
 
 
-  <title>分类: 虚拟化 | TIM Blog</title>
+  <title>用 PowerCLI 从 Datastore 中批量获取 VMX 文件注册到 VC | TIM Blog</title>
   
 
 
@@ -163,7 +165,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -311,111 +313,224 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>虚拟化<small>分类</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/17/powecli-register-datastore-vmx/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TIM">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/site_ico.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TIM Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/07/17/powecli-register-datastore-vmx/" itemprop="url">
-              
-                <span itemprop="name">用 PowerCLI 从 Datastore 中批量获取 VMX 文件注册到 VC</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">用 PowerCLI 从 Datastore 中批量获取 VMX 文件注册到 VC</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-17T13:23:10+00:00"
-              content="2017-07-17" >
-          07-17
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T13:23:10+00:00">
+                2017-07-17
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/虚拟化/" itemprop="url" rel="index">
+                    <span itemprop="name">虚拟化</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/17/powecli-register-datastore-vmx/" class="leancloud_visitors" data-flag-title="用 PowerCLI 从 Datastore 中批量获取 VMX 文件注册到 VC">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/11/15/vcsa-web-client-svc/" itemprop="url">
-              
-                <span itemprop="name">解决 vCSA 6.0 vphere-web-client-页面无法打开</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-15T14:20:35+00:00"
-              content="2016-11-15" >
-          11-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2014/08/08/virtualization-evo/" itemprop="url">
-              
-                <span itemprop="name">虚拟化是什么</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2014-08-08T16:15:13+00:00"
-              content="2014-08-08" >
-          08-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <h2 id="适合场景"><a href="#适合场景" class="headerlink" title="适合场景"></a>适合场景</h2><ul>
+<li>存储搬迁到别的机房，VM 计划性停机，使用需要批量的把 VM 注册到新机房的计算资源池中。</li>
+<li>适合找出没有注册到VC指定位置中的非活动 VM</li>
+</ul>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
+<li><p>获取 Datastore 的信息 ，示例是获取集群内的 Datastore</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$Datastoreinfo =  Get-Datastore -Nmae &apos;DatastoreName&apos; | %&#123;Get-View $_.Id&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>处理 Datastore 的信息</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$DsBrowser = Get-View $Datastoreinfo.browser</div></pre></td></tr></table></figure>
+</li>
+<li><p>新建搜索对象，附加搜索条件</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$SearchSpec = New-Object VMware.Vim.HostDatastoreBrowserSearchSpec</div><div class="line">$SearchSpec.matchpattern = &quot;*.vmx&quot;</div><div class="line">$DsPath = &quot;[&quot; + $Datastoreinfo.Name + &quot;]&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>搜索并展现</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$SearchResult = $DsBrowser.SearchDatastoreSubFolders($DsPath, $SearchSpec) | where &#123;$_.FolderPath -notmatch &quot;.snapshot&quot;&#125; | %&#123;$.FolderPath + ($_.File | select Path).Path&#125;</div></pre></td></tr></table></figure>
+<p> 最终输出的结果为<br> [datastorename] VMnameFolder/VMname.vmx</p>
+</li>
+<li><p>注册VM<br> New-VM -Name $VMname -VMFilePath $VMXpath -ResourcePool $vmhost -Location $VMFolder -RunAsync</p>
+</li>
+<li>*如果 VM 名称曾经修改过，又没有做过 XvMotion (storeger vMotion) VMnameFolder以及目录下所有的VM文件，还是原来旧的 VMname 命名。</li>
+</ol>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><ul>
+<li>可套用 foreach 循环，对多个 Datastore 进行检索VMX文件</li>
+<li>如果是场景1，可在 VM 是注册状态下，使用 PowerCLI 直接获取 VMX_PATH 路径以及对应的 VMname，位置信息等，导出为表，将来可使用 PowerCLI 根据表的信息进行注册。</li>
+</ul>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PowerCLI/" rel="tag"># PowerCLI</a>
+          
+            <a href="/tags/VMWare运维/" rel="tag"># VMWare运维</a>
+          
+            <a href="/tags/VMX/" rel="tag"># VMX</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/15/vcsa-web-client-svc/" rel="next" title="解决 vCSA 6.0 vphere-web-client-页面无法打开">
+                <i class="fa fa-chevron-left"></i> 解决 vCSA 6.0 vphere-web-client-页面无法打开
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+ <div class="-mob-share-ui-button -mob-share-open" style="background:#222222">分 享</div>
+ <div class="-mob-share-ui -mob-share-ui-theme -mob-share-ui-theme-slide-bottom" style="display: none">
+     <ul class="-mob-share-list">
+         <li class="-mob-share-weibo"><p>新浪微博</p></li>
+         <li class="-mob-share-qq"><p>QQ好友</p></li>
+         <li class="-mob-share-weixin"><p>微信</p></li>
+     </ul>
+    <div class="-mob-share-close">取消</div>
+ </div>
+ <div class="-mob-share-ui-bg"></div>
+ <script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=2014469f04a50"></script>
+ <!--MOB SHARE END-->
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -423,6 +538,22 @@
 
 
           
+  <div class="comments" id="comments">
+      
+        <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+        <script src='/lib/Valine.min.js'></script>
+        <script>
+            new Valine({
+                av: AV,
+                el: '.comments' ,
+                app_id: 'B9QHiqOmHqr2U7z2GPt8YwKL-gzGzoHsz',
+                app_key: 'URLbK1tcnXiFCt8u7jhnuJkO',
+                placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!'
+            });
+        </script>
+      
+  </div>
+
         </div>
         
           
@@ -442,8 +573,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/site_ico.jpg"
@@ -505,6 +645,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#适合场景"><span class="nav-number">1.</span> <span class="nav-text">适合场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展"><span class="nav-number">3.</span> <span class="nav-text">扩展</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -617,10 +773,10 @@
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
