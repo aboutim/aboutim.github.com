@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[用 PowerCLI 从 Datastore 中批量获取 VMX 文件注册到 VC]]></title>
+    <title><![CDATA[使用 PowerCLI 批量获取 VMX 并注册到 VC 清单中]]></title>
     <url>%2F2017%2F07%2F17%2Fpowecli-register-datastore-vmx%2F</url>
     <content type="text"><![CDATA[适合场景 存储搬迁到别的机房，VM 计划性停机，使用需要批量的把 VM 注册到新机房的计算资源池中。 适合找出没有注册到VC指定位置中的非活动 VM 思路 获取 Datastore 的信息 ，示例是获取集群内的 Datastore 1$Datastoreinfo = Get-Datastore -Nmae &apos;DatastoreName&apos; | %&#123;Get-View $_.Id&#125; 处理 Datastore 的信息 1$DsBrowser = Get-View $Datastoreinfo.browser 新建搜索对象，附加搜索条件 123$SearchSpec = New-Object VMware.Vim.HostDatastoreBrowserSearchSpec$SearchSpec.matchpattern = &quot;*.vmx&quot;$DsPath = &quot;[&quot; + $Datastoreinfo.Name + &quot;]&quot; 搜索并展现 1$SearchResult = $DsBrowser.SearchDatastoreSubFolders($DsPath, $SearchSpec) | where &#123;$_.FolderPath -notmatch &quot;.snapshot&quot;&#125; | %&#123;$.FolderPath + ($_.File | select Path).Path&#125; 最终输出的结果为 1[datastorename] VMnameFolder/VMname.vmx 注册VM 1New-VM -Name $VMname -VMFilePath $VMXpath -ResourcePool $vmhost -Location $VMFolder -RunAsync *如果 VM 名称曾经修改过，又没有做过 XvMotion (storeger vMotion) VMnameFolder以及目录下所有的VM文件，还是原来旧的 VMname 命名。 扩展 可套用 foreach 循环，对多个 Datastore 进行检索VMX文件 如果是场景1，可在 VM 是注册状态下，使用 PowerCLI 直接获取 VMX_PATH 路径以及对应的 VMname，位置信息等，导出为表，将来可使用 PowerCLI 根据表的信息进行注册。]]></content>
       <categories>
@@ -27,6 +27,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[使用 Powershell 远程管理服务器]]></title>
+    <url>%2F2015%2F11%2F18%2Fpowershell-mag-remote-host%2F</url>
+    <content type="text"><![CDATA[管理环境-条件 远程服务器（客户端） 默认情况下，PowerShell 禁止 PowerShell 脚本在 Windows 系统中执行。需要修改策略来解除。 PowerShell 管理员模式下执行： 1Set-ExecutionPolicy bypass 启用远程处理模式 1Enable-PSRemoting -force 管理服务器（管理端） 添加信任列表，PowerShell 管理员模式下执行： 1Set-Item WSMan:\localhost\Client\TrustedHosts -Value * -force 扩展远程操作主要依赖几个Session（会话）命令和Invoke-Command命令来进行。总结下 Enter-PSSession 远程交互式会话 这个场景一般用于手动进行远程操作，输入命令，查看结果。方法很简单。进入交互式会话的命令是Enter-PSSession，退出时键入Exit-PSSession或者exit都可以。远程交互式操作期间，输入的命令在远程计算机上运行，就像直接在远程计算机上输入并执行这些命令一样。期间所定义的变量和命令的执行结果在退出交互式会话之后不再可用。 New-pssession 建立会话执行一次性操作 这种在本地计算机与远程计算机上建立一个临时会话。将脚本块或者脚本文件的内容发送到远程计算机执行，并将结果发回本地计算机。这种方法执行效率很高，是PowerShell推荐的执行远程命令的方法。除非需要在会话中共享数据，否则建议使用该使用方法。注意，会话数量是有限制的，用完务必释放会话。 Invoke-Command 命令/脚本在命名会话中执行 用 New-pssession 建立会话并保存到一个变量中，然后在Invoke-Command中指定会话使用该变量。可将执行结果赋予到新的变量中 格式： 1$sub = Invoke-Command -Session $session1 -ScriptBlock &#123;dir c:\&#125; 其它PowerShell 在网络处理方面有诸多限制。比如 PowerShell 不能在远程机器上显示界面，即使是有界面的程序，也只能在后台运行。]]></content>
+      <categories>
+        <category>Powershell</category>
+      </categories>
+      <tags>
+        <tag>Powershell</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[虚拟化是什么]]></title>
     <url>%2F2014%2F08%2F08%2Fvirtualization-evo%2F</url>
     <content type="text"><![CDATA[引用WIKI 在计算机技术中，虚拟化（技术）或虚拟技术（英语：Virtualization）是一种资源管理技术，是将计算机的各种实体资源（CPU、内存、磁盘空间、网络适配器等），予以抽象、转换后呈现出来并可供分区、组合为一个或多个电脑配置环境。由此，打破实体结构间的不可切割的障碍，使用户可以比原本的配置更好的方式来应用这些电脑硬件资源。这些资源的新虚拟部分是不受现有资源的架设方式，地域或物理配置所限制。一般所指的虚拟化资源包括计算能力和数据存储。 虚拟化不是一个新技术，在上个世纪60年代就已经诞生了，真正在X86架构下广泛应用应该是在本世纪初由VMWare公司推出企业级vSphere 虚拟化软件产品，配合Intel 等厂商随着工艺的不断进步升级，物理服务器可以运行多个虚拟机，每个虚拟机可以负载不同的程序，极大的提高了物理服务器的资源利用率，同时也保持了程序之间隔离性。 虚拟化技术解决了什么问题虚拟化技术在那些领域中得到广泛应用选择虚拟化的思考点极大的提高资源的利用率缩减了企业的IT成本创新、先进是企业在竞争中重要的决胜关键点]]></content>
@@ -40,7 +51,7 @@
   <entry>
     <title><![CDATA[关于这里]]></title>
     <url>%2F2014%2F07%2F13%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[记录我在IT技术的道路上探索实践中有趣的点点滴滴熟悉技能：VMWare vSphere/Horizon 安装、部署、规划、设计、管理、自动化运维 Powershell、PowerCLI、Pyhton 服务器、数据存储/管理/备份/复制等方案设计 基于VMWare环境的网络/存储/备份/灾备 有一定的研究 专注方向：云计算、虚拟化技术、数据存储与管理]]></content>
+    <content type="text"><![CDATA[记录我在IT技术的道路上探索实践中的点点滴滴专注方向VMWare vSphere/Horizon 安装、部署、规划、设计、管理、自动化运维 Powershell、PowerCLI、Pyhton 服务器、数据存储/管理/备份/复制等方案设计 基于VMWare环境的网络/存储/备份/灾备 有一定的研究 云计算、虚拟化技术、数据存储与管理]]></content>
       <categories>
         <category>随手杂记</category>
       </categories>
