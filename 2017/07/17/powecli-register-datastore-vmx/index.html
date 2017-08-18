@@ -25,11 +25,15 @@
 
 
 
+  <meta name="google-site-verification" content="VqxufGt0FNri5b57H4Ifj1fChfcK4ygvUb6_VgwbnFc" />
 
 
 
 
 
+
+
+  <meta name="baidu-site-verification" content="cUWOnrASDh" />
 
 
 
@@ -102,7 +106,7 @@
 <meta property="og:site_name" content="TIM Blog">
 <meta property="og:description" content="适合场景 存储搬迁到别的机房，VM 计划性停机，使用需要批量的把 VM 注册到新机房的计算资源池中。 适合找出没有注册到VC指定位置中的非活动 VM  思路 获取 Datastore 的信息 ，示例是获取集群内的 Datastore  1$Datastoreinfo =  Get-Datastore -Nmae &amp;apos;DatastoreName&amp;apos; | %&amp;#123;Get-View">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-17T07:57:12.211Z">
+<meta property="og:updated_time" content="2017-08-18T07:24:32.478Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用 PowerCLI 从 Datastore 中批量获取 VMX 文件注册到 VC">
 <meta name="twitter:description" content="适合场景 存储搬迁到别的机房，VM 计划性停机，使用需要批量的把 VM 注册到新机房的计算资源池中。 适合找出没有注册到VC指定位置中的非活动 VM  思路 获取 Datastore 的信息 ，示例是获取集群内的 Datastore  1$Datastoreinfo =  Get-Datastore -Nmae &amp;apos;DatastoreName&amp;apos; | %&amp;#123;Get-View">
@@ -443,12 +447,14 @@
 </li>
 <li><p>搜索并展现</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$SearchResult = $DsBrowser.SearchDatastoreSubFolders($DsPath, $SearchSpec) | where &#123;$_.FolderPath -notmatch &quot;.snapshot&quot;&#125; | %&#123;$.FolderPath + ($_.File | select Path).Path&#125;</div></pre></td></tr></table></figure>
-<p> 最终输出的结果为<br> [datastorename] VMnameFolder/VMname.vmx</p>
+<p> 最终输出的结果为</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[datastorename] VMnameFolder/VMname.vmx</div></pre></td></tr></table></figure>
 </li>
-<li><p>注册VM<br> New-VM -Name $VMname -VMFilePath $VMXpath -ResourcePool $vmhost -Location $VMFolder -RunAsync</p>
+<li><p>注册VM</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">New-VM -Name $VMname -VMFilePath $VMXpath -ResourcePool $vmhost -Location $VMFolder -RunAsync</div></pre></td></tr></table></figure>
 </li>
-<li>*如果 VM 名称曾经修改过，又没有做过 XvMotion (storeger vMotion) VMnameFolder以及目录下所有的VM文件，还是原来旧的 VMname 命名。</li>
 </ol>
+<p>*如果 VM 名称曾经修改过，又没有做过 XvMotion (storeger vMotion) VMnameFolder以及目录下所有的VM文件，还是原来旧的 VMname 命名。</p>
 <h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><ul>
 <li>可套用 foreach 循环，对多个 Datastore 进行检索VMX文件</li>
 <li>如果是场景1，可在 VM 是注册状态下，使用 PowerCLI 直接获取 VMX_PATH 路径以及对应的 VMname，位置信息等，导出为表，将来可使用 PowerCLI 根据表的信息进行注册。</li>
