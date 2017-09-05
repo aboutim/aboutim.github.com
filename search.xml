@@ -8,8 +8,8 @@
         <category>虚拟化</category>
       </categories>
       <tags>
-        <tag>VMWare运维</tag>
         <tag>PowerCLI</tag>
+        <tag>VMWare运维</tag>
         <tag>VMX</tag>
       </tags>
   </entry>
@@ -112,12 +112,12 @@
   <entry>
     <title><![CDATA[故障排错-ESXI-VM无法启动以及迁移且SSH/shell服务无法启动]]></title>
     <url>%2F2015%2F11%2F11%2Fesxi-Troubleshooting-svc-donowork%2F</url>
-    <content type="text"><![CDATA[故障信息对象：ESXI 主机现象：虚拟机无法正常开机，正在运行的虚拟机无法迁移到别的主机，SSH/shell服务挂死、重启启动失败。尽量不能直接重启ESXI主机，会中断正在运行的虚拟机 排错步骤 先把SSH/shell服务重新变为可用 1控制台重启 manager server 但第二个问题诞生了，正在 此ESXI 主机上运行的虚拟机在 VC 上变成无效了 ，状态为未知 12345SSH上去，使用 esxtop 查看虚拟机是正在运行的出现这种情况是因为重启管理服务之后HOSTD、VXPD服务起来之后无法读取到正在运行的虚机的VMX文件，无法读取配置文件。需要命令行迁移VM（测试过不行）或者重新启动VM。让VMX变为可读状态，hostd服务才能正确读取到虚机配置。 翻 KB2083312 找到了一个答案，解释了TRP文件过多，影响了ESXI主机的部分服务SSH上去一查，果然 通过运行以下命令删除 /var/spool/snmp/ 目录中的 .trp 文件： 12# cd /var/spool/snmp# for i in $(ls | grep trp); do rm -f $i;done 要确保此问题不会重复发生，可暂时禁用 snmpd 以停止日志记录。要停止 snmpd 服务，请运行以下命令： 1# /etc/init.d/snmpd stop 官方建议停止SNMPD这个服务，但是TRP文件依然增长，启用后，TRP文件却停止增长了。 12snmpd is running# /etc/init.d/snmpd start 因为 trp 文件过多，所以对 ESXI 主机的服务状态进行维护变更会失败，现在清理完了，重新的把主要的服务 hostd 启动 12/etc/init.d/hostd status /etc/init.d/hostd start Restart重启服务 start 启动服务 重启了HOSTD服务后，esxi主机的管理agent会短暂重启一下，并不会影响虚机，使用client重新连接ESXI主机后，hostd 能正确读取到正在运行的虚机状态。 另外如果资源池与虚拟机的目录关系有异常，把 vxpa 的服务也重新启动一下吧1/etc/init.d/vpxa restart]]></content>
+    <content type="text"><![CDATA[故障信息对象：ESXI 主机现象：虚拟机无法正常开机，正在运行的虚拟机无法迁移到别的主机，SSH/shell服务挂死、重启启动失败。尽量不能直接重启ESXI主机，会中断正在运行的虚拟机 排错步骤 先把SSH/shell服务重新变为可用 1控制台重启 manager server 但第二个问题诞生了，正在 此ESXI 主机上运行的虚拟机在 VC 上变成无效了 ，状态为未知 12345SSH上去，使用 esxtop 查看虚拟机是正在运行的出现这种情况是因为重启管理服务之后HOSTD、VXPD服务起来之后无法读取到正在运行的虚机的VMX文件，无法读取配置文件。需要命令行迁移VM（测试过不行）或者重新启动VM。让VMX变为可读状态，hostd服务才能正确读取到虚机配置。 翻 KB2083312 找到了一个答案，解释了TRP文件过多，影响了ESXI主机的部分服务SSH上去一查，果然 通过运行以下命令删除 /var/spool/snmp/ 目录中的 .trp 文件：12# cd /var/spool/snmp# for i in $(ls | grep trp); do rm -f $i;done 要确保此问题不会重复发生，可暂时禁用 snmpd 以停止日志记录。要停止 snmpd 服务，请运行以下命令：1# /etc/init.d/snmpd stop 官方建议停止SNMPD这个服务，但是TRP文件依然增长，启用后，TRP文件却停止增长了。12snmpd is running# /etc/init.d/snmpd start 因为 trp 文件过多，所以对 ESXI 主机的服务状态进行维护变更会失败，现在清理完了，重新的把主要的服务 hostd 启动12/etc/init.d/hostd status /etc/init.d/hostd start Restart重启服务 start 启动服务 重启了 hostd 服务后，esxi主机的管理agent会短暂重启一下，并不会影响虚机，使用client重新连接ESXI主机后，hostd 能正确读取到正在运行的虚机状态。 另外如果资源池与虚拟机的目录关系有异常，把 vxpa 的服务也重新启动一下吧1/etc/init.d/vpxa restart]]></content>
       <categories>
-        <category>运维</category>
+        <category>VMWare运维</category>
       </categories>
       <tags>
-        <tag>VMWare运维</tag>
+        <tag>ESXI</tag>
         <tag>排障</tag>
       </tags>
   </entry>
@@ -126,7 +126,7 @@
     <url>%2F2015%2F07%2F05%2Fesxi-cmd-ops%2F</url>
     <content type="text"><![CDATA[命令行取消正在运行的任务 SSH ESXi 执行一下命令查询当前任务列表 1#vim-cmd vimsvc/task_list 查看任务具体细节 1#vim-cmd vimsvc/task_info xxxxx xxxxx 代表任务ID 确认之后，执行以下命令取消任务1#vim-cmd vimsvc/task_cancel xxxxx 命令行杀死虚拟机 SSH ESXi 输入 esxtop , 打开 esxtop 界面 输入C 切换到 CPU 资源界面 按shift + V 只显示 VMs 相关的信息 接着输入 F ，按 C 把 LWID 显示出来 按 K ，把需要杀死的虚拟机的LWID 输入回车即可 备份 ESXi 设定参数 WinSCP 登录到 ESXi ，找到 /bootbank/state.tgz 拷贝出来 然后进行要更改的设定 如需要恢复更改之前的状态，直接把副本覆盖到目录下替换 命令行执行 reboot -f 重启 vmkping默认情况下，ESXI 使用 PING 测试网络默认是用管理IP去发起的，如果是测试其它vmkernel的网络 则使用vmkping]]></content>
       <categories>
-        <category>VMware</category>
+        <category>VMware运维</category>
       </categories>
       <tags>
         <tag>ESXi</tag>
