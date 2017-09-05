@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ESXI,排障," />
+  <meta name="keywords" content="ESXi,排障," />
 
 
 
@@ -99,7 +99,7 @@
 
 
 <meta name="description" content="故障信息对象：ESXI 主机现象：虚拟机无法正常开机，正在运行的虚拟机无法迁移到别的主机，SSH/shell服务挂死、重启启动失败。尽量不能直接重启ESXI主机，会中断正在运行的虚拟机 排错步骤 先把SSH/shell服务重新变为可用 1控制台重启 manager server  但第二个问题诞生了，正在 此ESXI 主机上运行的虚拟机在 VC 上变成无效了 ，状态为未知 12345SSH上去，使">
-<meta name="keywords" content="ESXI,排障">
+<meta name="keywords" content="ESXi,排障">
 <meta property="og:type" content="article">
 <meta property="og:title" content="故障排错-ESXI-VM无法启动以及迁移且SSH&#x2F;shell服务无法启动">
 <meta property="og:url" content="http://yoursite.com/2015/11/11/esxi-Troubleshooting-svc-donowork/index.html">
@@ -107,7 +107,7 @@
 <meta property="og:description" content="故障信息对象：ESXI 主机现象：虚拟机无法正常开机，正在运行的虚拟机无法迁移到别的主机，SSH/shell服务挂死、重启启动失败。尽量不能直接重启ESXI主机，会中断正在运行的虚拟机 排错步骤 先把SSH/shell服务重新变为可用 1控制台重启 manager server  但第二个问题诞生了，正在 此ESXI 主机上运行的虚拟机在 VC 上变成无效了 ，状态为未知 12345SSH上去，使">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://pek3a.qingstor.com/mynotes/esxi-ts-001.png">
-<meta property="og:updated_time" content="2017-09-05T08:58:04.406Z">
+<meta property="og:updated_time" content="2017-09-05T09:56:36.955Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="故障排错-ESXI-VM无法启动以及迁移且SSH&#x2F;shell服务无法启动">
 <meta name="twitter:description" content="故障信息对象：ESXI 主机现象：虚拟机无法正常开机，正在运行的虚拟机无法迁移到别的主机，SSH/shell服务挂死、重启启动失败。尽量不能直接重启ESXI主机，会中断正在运行的虚拟机 排错步骤 先把SSH/shell服务重新变为可用 1控制台重启 manager server  但第二个问题诞生了，正在 此ESXI 主机上运行的虚拟机在 VC 上变成无效了 ，状态为未知 12345SSH上去，使">
@@ -385,8 +385,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VMWare运维/" itemprop="url" rel="index">
-                    <span itemprop="name">VMWare运维</span>
+                  <a href="/categories/VMware运维/" itemprop="url" rel="index">
+                    <span itemprop="name">VMware运维</span>
                   </a>
                 </span>
 
@@ -450,7 +450,7 @@
 </li>
 </ol>
 <p>要确保此问题不会重复发生，可暂时禁用 snmpd 以停止日志记录。要停止 snmpd 服务，请运行以下命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> /etc/init.d/snmpd stop</div></pre></td></tr></table></figure></p>
-<p>官方建议停止SNMPD这个服务，但是TRP文件依然增长，<br>启用后，TRP文件却停止增长了。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">snmpd is running</div><div class="line"><span class="meta">#</span> /etc/init.d/snmpd start</div></pre></td></tr></table></figure></p>
+<p>官方建议停止 snmpd 这个服务，但是TRP文件依然增长，<br>启用后，TRP文件却停止增长了。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">snmpd is running</div><div class="line"><span class="meta">#</span> /etc/init.d/snmpd start</div></pre></td></tr></table></figure></p>
 <ol>
 <li>因为 trp 文件过多，所以对 ESXI 主机的服务状态进行维护变更会失败，现在清理完了，重新的把主要的服务 hostd 启动<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/hostd status </div><div class="line">/etc/init.d/hostd start</div></pre></td></tr></table></figure>
 </li>
@@ -475,7 +475,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ESXI/" rel="tag"># ESXI</a>
+            <a href="/tags/ESXi/" rel="tag"># ESXi</a>
           
             <a href="/tags/排障/" rel="tag"># 排障</a>
           
@@ -605,7 +605,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -616,7 +616,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -627,7 +627,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

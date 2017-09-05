@@ -98,22 +98,22 @@
 
 
 
-<meta name="description" content="命令行取消正在运行的任务 SSH ESXi 执行一下命令查询当前任务列表 1#vim-cmd vimsvc/task_list  查看任务具体细节 1#vim-cmd vimsvc/task_info xxxxx   xxxxx 代表任务ID  确认之后，执行以下命令取消任务1#vim-cmd vimsvc/task_cancel xxxxx   命令行杀死虚拟机 SSH ESXi 输入 esxt">
+<meta name="description" content="命令行取消正在运行的任务 SSH ESXi 执行一下命令查询当前任务列表 1#vim-cmd vimsvc/task_list  查看任务具体细节 “xxxxx” 代表任务ID 1#vim-cmd vimsvc/task_info xxxxx  确认之后，执行以下命令取消任务 1#vim-cmd vimsvc/task_cancel xxxxx   命令行杀死虚拟机 SSH ESXi 输入 esx">
 <meta name="keywords" content="ESXi,command">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vSphere运维的一些命令">
 <meta property="og:url" content="http://yoursite.com/2015/07/05/esxi-cmd-ops/index.html">
 <meta property="og:site_name" content="TIM Blog">
-<meta property="og:description" content="命令行取消正在运行的任务 SSH ESXi 执行一下命令查询当前任务列表 1#vim-cmd vimsvc/task_list  查看任务具体细节 1#vim-cmd vimsvc/task_info xxxxx   xxxxx 代表任务ID  确认之后，执行以下命令取消任务1#vim-cmd vimsvc/task_cancel xxxxx   命令行杀死虚拟机 SSH ESXi 输入 esxt">
+<meta property="og:description" content="命令行取消正在运行的任务 SSH ESXi 执行一下命令查询当前任务列表 1#vim-cmd vimsvc/task_list  查看任务具体细节 “xxxxx” 代表任务ID 1#vim-cmd vimsvc/task_info xxxxx  确认之后，执行以下命令取消任务 1#vim-cmd vimsvc/task_cancel xxxxx   命令行杀死虚拟机 SSH ESXi 输入 esx">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://pek3a.qingstor.com/mynotes/esxtop-command-1.png">
 <meta property="og:image" content="https://pek3a.qingstor.com/mynotes/esxtop-command-2.png">
 <meta property="og:image" content="https://pek3a.qingstor.com/mynotes/esxtop-command-3.png">
 <meta property="og:image" content="https://pek3a.qingstor.com/mynotes/esxtop-command-2.png">
-<meta property="og:updated_time" content="2017-09-05T08:58:04.421Z">
+<meta property="og:updated_time" content="2017-09-05T09:56:36.955Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vSphere运维的一些命令">
-<meta name="twitter:description" content="命令行取消正在运行的任务 SSH ESXi 执行一下命令查询当前任务列表 1#vim-cmd vimsvc/task_list  查看任务具体细节 1#vim-cmd vimsvc/task_info xxxxx   xxxxx 代表任务ID  确认之后，执行以下命令取消任务1#vim-cmd vimsvc/task_cancel xxxxx   命令行杀死虚拟机 SSH ESXi 输入 esxt">
+<meta name="twitter:description" content="命令行取消正在运行的任务 SSH ESXi 执行一下命令查询当前任务列表 1#vim-cmd vimsvc/task_list  查看任务具体细节 “xxxxx” 代表任务ID 1#vim-cmd vimsvc/task_info xxxxx  确认之后，执行以下命令取消任务 1#vim-cmd vimsvc/task_cancel xxxxx   命令行杀死虚拟机 SSH ESXi 输入 esx">
 <meta name="twitter:image" content="https://pek3a.qingstor.com/mynotes/esxtop-command-1.png">
 
 
@@ -441,13 +441,11 @@
 <li><p>执行一下命令查询当前任务列表</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>vim-cmd vimsvc/task_list</div></pre></td></tr></table></figure>
 </li>
-<li><p>查看任务具体细节</p>
+<li><p>查看任务具体细节 “xxxxx” 代表任务ID</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>vim-cmd vimsvc/task_info xxxxx</div></pre></td></tr></table></figure>
 </li>
-</ol>
-<p>xxxxx 代表任务ID</p>
-<ol>
-<li>确认之后，执行以下命令取消任务<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>vim-cmd vimsvc/task_cancel xxxxx</div></pre></td></tr></table></figure>
+<li><p>确认之后，执行以下命令取消任务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>vim-cmd vimsvc/task_cancel xxxxx</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <h2 id="命令行杀死虚拟机"><a href="#命令行杀死虚拟机" class="headerlink" title="命令行杀死虚拟机"></a>命令行杀死虚拟机</h2><ol>
@@ -472,6 +470,17 @@
 <li>命令行执行 reboot -f 重启</li>
 </ol>
 <h2 id="vmkping"><a href="#vmkping" class="headerlink" title="vmkping"></a>vmkping</h2><p>默认情况下，ESXI 使用 PING 测试网络默认是用管理IP去发起的，如果是测试其它vmkernel的网络 则使用vmkping</p>
+<h2 id="禁用vSAN-Health-Service"><a href="#禁用vSAN-Health-Service" class="headerlink" title="禁用vSAN Health Service"></a>禁用vSAN Health Service</h2><p>如果没有使用 vSAN , VC 的任务栏会被</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">启用了 Non-Virtual SAN 的 ESXi 主机显示以下消息：</div><div class="line">检索用来注册 Virtual SAN VASA 提供程序的票证 </div><div class="line">(Retrieve a ticket to register the Virtual SAN VASA Provider)</div></pre></td></tr></table></figure>
+<p>这个任务刷屏，及其讨厌<br>不久前 <a href="https://kb.vmware.com/selfservice/microsites/search.do?language=en_US&amp;cmd=displayKC&amp;externalId=2145594" target="_blank" rel="external">KB2145594</a><br>终于解决了这个问题了<br>摘抄一下 vCSA 的操作</p>
+<ol>
+<li>停止 vSAN Health Service：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># service vmware-vsan-health stop</div></pre></td></tr></table></figure>
+<ol>
+<li>禁用 vSAN Health Service：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># chkconfig vmware-vsan-health off</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -619,7 +628,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -630,7 +639,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -641,7 +650,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -676,7 +685,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行取消正在运行的任务"><span class="nav-number">1.</span> <span class="nav-text">命令行取消正在运行的任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行杀死虚拟机"><span class="nav-number">2.</span> <span class="nav-text">命令行杀死虚拟机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备份-ESXi-设定参数"><span class="nav-number">3.</span> <span class="nav-text">备份 ESXi 设定参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vmkping"><span class="nav-number">4.</span> <span class="nav-text">vmkping</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行取消正在运行的任务"><span class="nav-number">1.</span> <span class="nav-text">命令行取消正在运行的任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行杀死虚拟机"><span class="nav-number">2.</span> <span class="nav-text">命令行杀死虚拟机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备份-ESXi-设定参数"><span class="nav-number">3.</span> <span class="nav-text">备份 ESXi 设定参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vmkping"><span class="nav-number">4.</span> <span class="nav-text">vmkping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#禁用vSAN-Health-Service"><span class="nav-number">5.</span> <span class="nav-text">禁用vSAN Health Service</span></a></li></ol></div>
             
 
           </div>
