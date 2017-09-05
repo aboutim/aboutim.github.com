@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="ESXi,command," />
 
 
 
@@ -98,16 +98,23 @@
 
 
 
-<meta name="description" content="黎明之前最黑暗">
-<meta property="og:type" content="website">
-<meta property="og:title" content="TIM Blog">
-<meta property="og:url" content="http://yoursite.com/tags/VMWare运维/index.html">
+<meta name="description" content="命令行取消正在运行的任务 SSH ESXi 执行一下命令查询当前任务列表 1#vim-cmd vimsvc/task_list  查看任务具体细节 1#vim-cmd vimsvc/task_info xxxxx   xxxxx 代表任务ID  确认之后，执行以下命令取消任务1#vim-cmd vimsvc/task_cancel xxxxx   命令行杀死虚拟机 SSH ESXi 输入 esxt">
+<meta name="keywords" content="ESXi,command">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vSphere运维的一些命令">
+<meta property="og:url" content="http://yoursite.com/2015/07/05/esxi-cmd-ops/index.html">
 <meta property="og:site_name" content="TIM Blog">
-<meta property="og:description" content="黎明之前最黑暗">
+<meta property="og:description" content="命令行取消正在运行的任务 SSH ESXi 执行一下命令查询当前任务列表 1#vim-cmd vimsvc/task_list  查看任务具体细节 1#vim-cmd vimsvc/task_info xxxxx   xxxxx 代表任务ID  确认之后，执行以下命令取消任务1#vim-cmd vimsvc/task_cancel xxxxx   命令行杀死虚拟机 SSH ESXi 输入 esxt">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://pek3a.qingstor.com/mynotes/esxtop-command-1.png">
+<meta property="og:image" content="https://pek3a.qingstor.com/mynotes/esxtop-command-2.png">
+<meta property="og:image" content="https://pek3a.qingstor.com/mynotes/esxtop-command-3.png">
+<meta property="og:image" content="https://pek3a.qingstor.com/mynotes/esxtop-command-2.png">
+<meta property="og:updated_time" content="2017-09-05T08:47:41.068Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TIM Blog">
-<meta name="twitter:description" content="黎明之前最黑暗">
+<meta name="twitter:title" content="vSphere运维的一些命令">
+<meta name="twitter:description" content="命令行取消正在运行的任务 SSH ESXi 执行一下命令查询当前任务列表 1#vim-cmd vimsvc/task_list  查看任务具体细节 1#vim-cmd vimsvc/task_info xxxxx   xxxxx 代表任务ID  确认之后，执行以下命令取消任务1#vim-cmd vimsvc/task_cancel xxxxx   命令行杀死虚拟机 SSH ESXi 输入 esxt">
+<meta name="twitter:image" content="https://pek3a.qingstor.com/mynotes/esxtop-command-1.png">
 
 
 
@@ -136,13 +143,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/VMWare运维/"/>
+  <link rel="canonical" href="http://yoursite.com/2015/07/05/esxi-cmd-ops/"/>
 
 
 
 
 
-  <title>标签: VMWare运维 | TIM Blog</title>
+  <title>vSphere运维的一些命令 | TIM Blog</title>
   
 
 
@@ -167,7 +174,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -315,82 +322,236 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>VMWare运维<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/07/05/esxi-cmd-ops/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TIM">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/site_ico.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TIM Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/07/17/powecli-register-datastore-vmx/" itemprop="url">
-              
-                <span itemprop="name">使用 PowerCLI 批量获取 VMX 并注册到 VC 清单中</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">vSphere运维的一些命令</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-17T13:23:10+00:00"
-              content="2017-07-17" >
-          07-17
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-05T15:21:36+00:00">
+                2015-07-05
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/VMware/" itemprop="url" rel="index">
+                    <span itemprop="name">VMware</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2015/07/05/esxi-cmd-ops/" class="leancloud_visitors" data-flag-title="vSphere运维的一些命令">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2015/11/11/esxi-Troubleshooting-svc-donowork/" itemprop="url">
-              
-                <span itemprop="name">故障排错-ESXI-VM无法启动以及迁移且SSH/shell服务无法启动</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-11-11T11:09:11+00:00"
-              content="2015-11-11" >
-          11-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
+        <h2 id="命令行取消正在运行的任务"><a href="#命令行取消正在运行的任务" class="headerlink" title="命令行取消正在运行的任务"></a>命令行取消正在运行的任务</h2><ol>
+<li>SSH ESXi</li>
+<li><p>执行一下命令查询当前任务列表</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>vim-cmd vimsvc/task_list</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看任务具体细节</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>vim-cmd vimsvc/task_info xxxxx</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>xxxxx 代表任务ID</p>
+<ol>
+<li>确认之后，执行以下命令取消任务<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>vim-cmd vimsvc/task_cancel xxxxx</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="命令行杀死虚拟机"><a href="#命令行杀死虚拟机" class="headerlink" title="命令行杀死虚拟机"></a>命令行杀死虚拟机</h2><ol>
+<li>SSH ESXi</li>
+<li>输入 esxtop , 打开 esxtop 界面</li>
+<li>输入C 切换到 CPU 资源界面 按shift + V 只显示 VMs 相关的信息</li>
+</ol>
+<p><img src="https://pek3a.qingstor.com/mynotes/esxtop-command-1.png" alt="image"></p>
+<ol>
+<li>接着输入 F  ，按 C 把 LWID 显示出来</li>
+</ol>
+<p><img src="https://pek3a.qingstor.com/mynotes/esxtop-command-2.png" alt="image"></p>
+<p><img src="https://pek3a.qingstor.com/mynotes/esxtop-command-3.png" alt="image"></p>
+<ol>
+<li>按 K ，把需要杀死的虚拟机的LWID 输入回车即可</li>
+</ol>
+<p><img src="https://pek3a.qingstor.com/mynotes/esxtop-command-2.png" alt="image"></p>
+<h2 id="备份-ESXi-设定参数"><a href="#备份-ESXi-设定参数" class="headerlink" title="备份 ESXi 设定参数"></a>备份 ESXi 设定参数</h2><ol>
+<li>WinSCP 登录到 ESXi ，找到 /bootbank/state.tgz 拷贝出来</li>
+<li>然后进行要更改的设定</li>
+<li>如需要恢复更改之前的状态，直接把副本覆盖到目录下替换</li>
+<li>命令行执行 reboot -f 重启</li>
+</ol>
+<h2 id="vmkping"><a href="#vmkping" class="headerlink" title="vmkping"></a>vmkping</h2><p>默认情况下，ESXI 使用 PING 测试网络默认是用管理IP去发起的，如果是测试其它vmkernel的网络 则使用vmkping</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ESXi/" rel="tag"># ESXi</a>
+          
+            <a href="/tags/command/" rel="tag"># command</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/08/08/virtualization-evo/" rel="next" title="虚拟化是什么">
+                <i class="fa fa-chevron-left"></i> 虚拟化是什么
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/11/11/esxi-Troubleshooting-svc-donowork/" rel="prev" title="故障排错-ESXI-VM无法启动以及迁移且SSH/shell服务无法启动">
+                故障排错-ESXI-VM无法启动以及迁移且SSH/shell服务无法启动 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+ <div class="-mob-share-ui-button -mob-share-open" style="background:#222222">分 享</div>
+ <div class="-mob-share-ui -mob-share-ui-theme -mob-share-ui-theme-slide-bottom" style="display: none">
+     <ul class="-mob-share-list">
+         <li class="-mob-share-weibo"><p>新浪微博</p></li>
+         <li class="-mob-share-qq"><p>QQ好友</p></li>
+         <li class="-mob-share-weixin"><p>微信</p></li>
+     </ul>
+    <div class="-mob-share-close">取消</div>
+ </div>
+ <div class="-mob-share-ui-bg"></div>
+ <script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=2014469f04a50"></script>
+ <!--MOB SHARE END-->
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -398,6 +559,22 @@
 
 
           
+  <div class="comments" id="comments">
+      
+        <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+        <script src='/lib/Valine.min.js'></script>
+        <script>
+            new Valine({
+                av: AV,
+                el: '.comments' ,
+                app_id: 'B9QHiqOmHqr2U7z2GPt8YwKL-gzGzoHsz',
+                app_key: 'URLbK1tcnXiFCt8u7jhnuJkO',
+                placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!'
+            });
+        </script>
+      
+  </div>
+
         </div>
         
           
@@ -417,8 +594,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/site_ico.jpg"
@@ -480,6 +666,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行取消正在运行的任务"><span class="nav-number">1.</span> <span class="nav-text">命令行取消正在运行的任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行杀死虚拟机"><span class="nav-number">2.</span> <span class="nav-text">命令行杀死虚拟机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备份-ESXi-设定参数"><span class="nav-number">3.</span> <span class="nav-text">备份 ESXi 设定参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vmkping"><span class="nav-number">4.</span> <span class="nav-text">vmkping</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -592,10 +794,10 @@
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
