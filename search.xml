@@ -124,19 +124,30 @@
   <entry>
     <title><![CDATA[故障排错-ESXI-VM无法启动以及迁移且SSH/shell服务无法启动]]></title>
     <url>%2F2015%2F11%2F11%2Fesxi-Troubleshooting-svc-donowork%2F</url>
-    <content type="text"><![CDATA[故障信息对象：ESXI 主机现象：虚拟机无法正常开机，正在运行的虚拟机无法迁移到别的主机，SSH/shell服务挂死、重启启动失败。尽量不能直接重启ESXI主机，会中断正在运行的虚拟机 排错步骤 先把SSH/shell服务重新变为可用 1控制台重启 manager server 但第二个问题诞生了，正在 此ESXI 主机上运行的虚拟机在 VC 上变成无效了 ，状态为未知 12345SSH上去，使用 esxtop 查看虚拟机是正在运行的出现这种情况是因为重启管理服务之后HOSTD、VXPD服务起来之后无法读取到正在运行的虚机的VMX文件，无法读取配置文件。需要命令行迁移VM（测试过不行）或者重新启动VM。让VMX变为可读状态，hostd服务才能正确读取到虚机配置。 翻 KB2083312 找到了一个答案，解释了TRP文件过多，影响了ESXI主机的部分服务SSH上去一查，果然 通过运行以下命令删除 /var/spool/snmp/ 目录中的 .trp 文件：12# cd /var/spool/snmp# for i in $(ls | grep trp); do rm -f $i;done 要确保此问题不会重复发生，可暂时禁用 snmpd 以停止日志记录。要停止 snmpd 服务，请运行以下命令：1# /etc/init.d/snmpd stop 官方建议停止 snmpd 这个服务，但是TRP文件依然增长，启用后，TRP文件却停止增长了。12snmpd is running# /etc/init.d/snmpd start 因为 trp 文件过多，所以对 ESXI 主机的服务状态进行维护变更会失败，现在清理完了，重新的把主要的服务 hostd 启动12/etc/init.d/hostd status /etc/init.d/hostd start Restart重启服务 start 启动服务 重启了 hostd 服务后，esxi主机的管理agent会短暂重启一下，并不会影响虚机，使用client重新连接ESXI主机后，hostd 能正确读取到正在运行的虚机状态。 另外如果资源池与虚拟机的目录关系有异常，把 vxpa 的服务也重新启动一下吧1/etc/init.d/vpxa restart]]></content>
+    <content type="text"><![CDATA[故障信息对象：ESXI 主机现象：虚拟机无法正常开机，正在运行的虚拟机无法迁移到别的主机，SSH/shell服务挂死、重启启动失败。尽量不能直接重启ESXI主机，会中断正在运行的虚拟机 排错步骤1、先把SSH/shell服务重新变为可用1控制台重启 manager server 2、但第二个问题诞生了，正在 此ESXI 主机上运行的虚拟机在 VC 上变成无效了 ，状态为未知12345SSH上去，使用 esxtop 查看虚拟机是正在运行的出现这种情况是因为重启管理服务之后HOSTD、VXPD服务起来之后无法读取到正在运行的虚机的VMX文件，无法读取配置文件。需要命令行迁移VM（测试过不行）或者重新启动VM。让VMX变为可读状态，hostd服务才能正确读取到虚机配置。 3、翻 KB2083312 找到了一个答案，解释了TRP文件过多，影响了ESXI主机的部分服务SSH上去一查，果然 4、通过运行以下命令删除 /var/spool/snmp/ 目录中的 .trp 文件：12# cd /var/spool/snmp# for i in $(ls | grep trp); do rm -f $i;done 要确保此问题不会重复发生，可暂时禁用 snmpd 以停止日志记录。要停止 snmpd 服务，请运行以下命令：1# /etc/init.d/snmpd stop 官方建议停止SNMPD这个服务，但是TRP文件依然增长，启用后，TRP文件却停止增长了。12snmpd is running# /etc/init.d/snmpd start 5、因为 trp 文件过多，所以对 ESXI 主机的服务状态进行维护变更会失败，现在清理完了，重新的把主要的服务 hostd 启动12/etc/init.d/hostd status /etc/init.d/hostd start Restart重启服务 start 启动服务 重启了 hostd 服务后，esxi主机的管理agent会短暂重启一下，并不会影响虚机，使用client重新连接ESXI主机后，hostd 能正确读取到正在运行的虚机状态。 另外如果资源池与虚拟机的目录关系有异常，把 vxpa 的服务也重新启动一下吧1/etc/init.d/vpxa restart]]></content>
+      <categories>
+        <category>VMWare运维</category>
+      </categories>
+      <tags>
+        <tag>排障</tag>
+        <tag>ESXI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[分析虚拟机文件会被 HA 锁-案列]]></title>
+    <url>%2F2015%2F11%2F06%2FVM-FILE-LOCK-TS01%2F</url>
+    <content type="text"><![CDATA[之前发生过集群中的有个ESXi与某个 Datastore ，导致虚拟机卡死宕机了，然后无法强制关机，通过命令杀死虚拟机后。提示找不到虚拟机文件，无法启动，去 Datastore 对应的虚拟机目录看，虚拟机 vmx 配置文件是无图标的，即锁定状态。无法 ESXI 被读取到。因此需要解锁，解锁要找到谁上锁，排障的过程搜索过资料和与官方工程师讨论后决定从虚拟机清单中移除虚拟机，手动删除去 Datastore 对应的虚拟机目录 .LCK 锁定文件，修改 VMXF 后缀后，VMX 文件恢复为可注册状态。但是依然无法开机，因为被锁的还有 VMDK 文件 ，奔溃的是 VMDK 的解锁方式还真有点不一样。刚好搜索资料的时候，找到一篇博文，分析是 HA 的原因 导致被锁的，如下： 故障现象：启动虚拟机时 95 %，停顿并且启动任务中断，提示：ubable to access files since it is locked。 原因分析：是HA的原因。 解决方法： 1、首先将cluster中的HA功能关闭。如果该功能不关闭，容易造成死锁,，VM不断跳动，不断再不同的ESX内循环被锁，徒劳而无功。 2、磁盘文件被锁，要解决，必须要知道到底是哪台ESX把他给锁住了，这是关键。 操作：看/var/log/vmkernel但是，在做这些前, 再准备些别的工作。 3、在VC中，把被锁的VM从Inventory中remove掉。原因很简单，这是一个 unregister的过程。 4、根据/var/log/vmkernel，搜索owner，可以找到类似以下的语句: 1Oct 19 04:23:33 esx-hostname vmkernel: 3:06:29:47.992 cpu6:1656)FS3: 1975: Checking if lock holders are live for lock [type 10c00001 offset 52008960 v 380, hb offset 3554304 Oct 19 04:23:33 esx-hostname vmkernel: gen 17, mode 1, owner 48f5f637-462688bc-fd28-0e1a6434b6f8mtime 38112] OK，owner后面的48f5f637-462688bc-fd28-0e1a6434b6f8就是你的target了。 因为他就是锁住VM 的宿主.。 5、根据以下命令,，找出到底哪台ESX的UUID是 48f5f637-462688bc-fd28-0e1a6434b6f8 1[iyunv@esxhostname root]# esxcfg-info |grep -i system uuid 6、找到目标主机后，当然是杀死他锁住VM的进程。之所以会被锁，原因就是HA 把VM从别的HOST迁移过来，但是又没有unregister和register的过程，所以在第3步的时候，你查看VM的Summary的时候，host ip还是属于出问题的 host。 但是VM又被新的host霸王硬上功的power on，注册都没注册, 又怎么启动呢。找到 PID 用下面的命令： 1ps -efwww|grep virtualmachine.vmx 找到 PID 后, kill -9 PID 7、此时需确定一件事情（.vswp文件）。这个是给台客处理问题时吸取的经验。就因为忽略了这个，所以在杀掉?程后，重新注册VM，还说没有 SWAP文件，启动还是失败。 在 VM 启动时会自动生成SWAP，没有SWAP文件，其实就是因为 SWAP 存在了, 因为重名而导致无法正常生成。 进入到/vmfs/volumes/lunid/vm_path/下，vmkfs -d virtual_machine.vswp 或者进入Datastore Browser，在里面把SWAP文件删除也可。 8、完全之策，你还可以进入到VM的SETTINGS–OPTIONS–SWAPFILE LOCATION， 对该保存的位置做下设置。 9、重新注册VM。进入Datastore Browser，找到VM.vmx，add to inventory。 10、启动VM。]]></content>
       <categories>
         <category>VMware运维</category>
       </categories>
       <tags>
-        <tag>ESXi</tag>
         <tag>排障</tag>
       </tags>
   </entry>
   <entry>
     <title><![CDATA[vSphere运维的一些命令]]></title>
     <url>%2F2015%2F07%2F05%2Fesxi-cmd-ops%2F</url>
-    <content type="text"><![CDATA[命令行取消正在运行的任务 SSH ESXi 执行一下命令查询当前任务列表 1#vim-cmd vimsvc/task_list 查看任务具体细节 “xxxxx” 代表任务ID 1#vim-cmd vimsvc/task_info xxxxx 确认之后，执行以下命令取消任务 1#vim-cmd vimsvc/task_cancel xxxxx 命令行杀死虚拟机 SSH ESXi 输入 esxtop , 打开 esxtop 界面 输入C 切换到 CPU 资源界面 按shift + V 只显示 VMs 相关的信息 接着输入 F ，按 C 把 LWID 显示出来 按 K ，把需要杀死的虚拟机的LWID 输入回车即可 备份 ESXi 设定参数 WinSCP 登录到 ESXi ，找到 /bootbank/state.tgz 拷贝出来 然后进行要更改的设定 如需要恢复更改之前的状态，直接把副本覆盖到目录下替换 命令行执行 reboot -f 重启 vmkping默认情况下，ESXI 使用 PING 测试网络默认是用管理IP去发起的，如果是测试其它vmkernel的网络 则使用vmkping 禁用vSAN Health Service如果没有使用 vSAN , VC 的任务栏会被 123启用了 Non-Virtual SAN 的 ESXi 主机显示以下消息：检索用来注册 Virtual SAN VASA 提供程序的票证 (Retrieve a ticket to register the Virtual SAN VASA Provider) 这个任务刷屏，及其讨厌不久前 KB2145594终于解决了这个问题了摘抄一下 vCSA 的操作 停止 vSAN Health Service： 1# service vmware-vsan-health stop 禁用 vSAN Health Service： 1# chkconfig vmware-vsan-health off]]></content>
+    <content type="text"><![CDATA[命令行取消正在运行的任务1、SSH ESXi2、执行一下命令查询当前任务列表1#vim-cmd vimsvc/task_list 3、查看任务具体细节 “xxxxx” 代表任务ID1#vim-cmd vimsvc/task_info xxxxx 4、确认之后，执行以下命令取消任务1#vim-cmd vimsvc/task_cancel xxxxx 命令行杀死虚拟机1、SSH ESXi2、输入 esxtop , 打开 esxtop 界面3、输入C 切换到 CPU 资源界面 按shift + V 只显示 VMs 相关的信息 4、接着输入 F ，按 C 把 LWID 显示出来 5、按 K ，把需要杀死的虚拟机的LWID 输入回车即可 备份 ESXi 设定参数1、WinSCP 登录到 ESXi ，找到 /bootbank/state.tgz 拷贝出来2、然后进行要更改的设定3、如需要恢复更改之前的状态，直接把副本覆盖到目录下替换4、命令行执行 reboot -f 重启 vmkping默认情况下，ESXI 使用 PING 测试网络默认是用管理IP去发起的，如果是测试其它vmkernel的网络 则使用vmkping 禁用vSAN Health Service如果没有使用 vSAN , VC 的任务栏会被1启用了 Non-Virtual SAN 的 ESXi 主机显示以下消息：检索用来注册 Virtual SAN VASA 提供程序的票证 (Retrieve a ticket to register the Virtual SAN VASA Provider) 这个任务刷屏，及其讨厌不久前 KB2145594终于解决了这个问题了摘抄一下 vCSA 的操作 1、停止 vSAN Health Service：1# service vmware-vsan-health stop 2、禁用 vSAN Health Service：1# chkconfig vmware-vsan-health off]]></content>
       <categories>
         <category>VMware运维</category>
       </categories>

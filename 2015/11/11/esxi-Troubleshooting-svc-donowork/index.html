@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ESXi,排障," />
+  <meta name="keywords" content="排障,ESXI," />
 
 
 
@@ -98,19 +98,19 @@
 
 
 
-<meta name="description" content="故障信息对象：ESXI 主机现象：虚拟机无法正常开机，正在运行的虚拟机无法迁移到别的主机，SSH/shell服务挂死、重启启动失败。尽量不能直接重启ESXI主机，会中断正在运行的虚拟机 排错步骤 先把SSH/shell服务重新变为可用 1控制台重启 manager server  但第二个问题诞生了，正在 此ESXI 主机上运行的虚拟机在 VC 上变成无效了 ，状态为未知 12345SSH上去，使">
-<meta name="keywords" content="ESXi,排障">
+<meta name="description" content="故障信息对象：ESXI 主机现象：虚拟机无法正常开机，正在运行的虚拟机无法迁移到别的主机，SSH/shell服务挂死、重启启动失败。尽量不能直接重启ESXI主机，会中断正在运行的虚拟机 排错步骤1、先把SSH/shell服务重新变为可用1控制台重启 manager server 2、但第二个问题诞生了，正在 此ESXI 主机上运行的虚拟机在 VC 上变成无效了 ，状态为未知12345SSH上去，使">
+<meta name="keywords" content="排障,ESXI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="故障排错-ESXI-VM无法启动以及迁移且SSH&#x2F;shell服务无法启动">
 <meta property="og:url" content="http://yoursite.com/2015/11/11/esxi-Troubleshooting-svc-donowork/index.html">
 <meta property="og:site_name" content="TIM Blog">
-<meta property="og:description" content="故障信息对象：ESXI 主机现象：虚拟机无法正常开机，正在运行的虚拟机无法迁移到别的主机，SSH/shell服务挂死、重启启动失败。尽量不能直接重启ESXI主机，会中断正在运行的虚拟机 排错步骤 先把SSH/shell服务重新变为可用 1控制台重启 manager server  但第二个问题诞生了，正在 此ESXI 主机上运行的虚拟机在 VC 上变成无效了 ，状态为未知 12345SSH上去，使">
+<meta property="og:description" content="故障信息对象：ESXI 主机现象：虚拟机无法正常开机，正在运行的虚拟机无法迁移到别的主机，SSH/shell服务挂死、重启启动失败。尽量不能直接重启ESXI主机，会中断正在运行的虚拟机 排错步骤1、先把SSH/shell服务重新变为可用1控制台重启 manager server 2、但第二个问题诞生了，正在 此ESXI 主机上运行的虚拟机在 VC 上变成无效了 ，状态为未知12345SSH上去，使">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://pek3a.qingstor.com/mynotes/esxi-ts-001.png">
-<meta property="og:updated_time" content="2017-09-05T09:56:36.955Z">
+<meta property="og:updated_time" content="2017-09-06T09:51:55.281Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="故障排错-ESXI-VM无法启动以及迁移且SSH&#x2F;shell服务无法启动">
-<meta name="twitter:description" content="故障信息对象：ESXI 主机现象：虚拟机无法正常开机，正在运行的虚拟机无法迁移到别的主机，SSH/shell服务挂死、重启启动失败。尽量不能直接重启ESXI主机，会中断正在运行的虚拟机 排错步骤 先把SSH/shell服务重新变为可用 1控制台重启 manager server  但第二个问题诞生了，正在 此ESXI 主机上运行的虚拟机在 VC 上变成无效了 ，状态为未知 12345SSH上去，使">
+<meta name="twitter:description" content="故障信息对象：ESXI 主机现象：虚拟机无法正常开机，正在运行的虚拟机无法迁移到别的主机，SSH/shell服务挂死、重启启动失败。尽量不能直接重启ESXI主机，会中断正在运行的虚拟机 排错步骤1、先把SSH/shell服务重新变为可用1控制台重启 manager server 2、但第二个问题诞生了，正在 此ESXI 主机上运行的虚拟机在 VC 上变成无效了 ，状态为未知12345SSH上去，使">
 <meta name="twitter:image" content="https://pek3a.qingstor.com/mynotes/esxi-ts-001.png">
 
 
@@ -385,8 +385,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VMware运维/" itemprop="url" rel="index">
-                    <span itemprop="name">VMware运维</span>
+                  <a href="/categories/VMWare运维/" itemprop="url" rel="index">
+                    <span itemprop="name">VMWare运维</span>
                   </a>
                 </span>
 
@@ -434,27 +434,14 @@
 
       
         <h2 id="故障信息"><a href="#故障信息" class="headerlink" title="故障信息"></a>故障信息</h2><p>对象：ESXI 主机<br>现象：虚拟机无法正常开机，正在运行的虚拟机无法迁移到别的主机，SSH/shell服务挂死、重启启动失败。<br>尽量不能直接重启ESXI主机，会中断正在运行的虚拟机</p>
-<h2 id="排错步骤"><a href="#排错步骤" class="headerlink" title="排错步骤"></a>排错步骤</h2><ol>
-<li><p>先把SSH/shell服务重新变为可用</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">控制台重启 manager server</div></pre></td></tr></table></figure>
-</li>
-<li><p>但第二个问题诞生了，正在 此ESXI 主机上运行的虚拟机在 VC 上变成无效了 ，状态为未知</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SSH上去，使用 esxtop 查看虚拟机是正在运行的</div><div class="line">出现这种情况是因为重启管理服务之后</div><div class="line">HOSTD、VXPD服务起来之后无法读取到正在运行的虚机的VMX文件，无法读取配置文件。</div><div class="line">需要命令行迁移VM（测试过不行）或者重新启动VM。</div><div class="line">让VMX变为可读状态，hostd服务才能正确读取到虚机配置。</div></pre></td></tr></table></figure>
-</li>
-<li><p>翻 <a href="https://kb.vmware.com/selfservice/microsites/search.do?cmd=displayKC&amp;docType=kc&amp;externalId=2083312&amp;sliceId=1&amp;docTypeID=DT_KB_1_1&amp;dialogID=584477504&amp;stateId=1%200%20485256400" target="_blank" rel="external">KB2083312</a>  找到了一个答案，解释了TRP文件过多，影响了ESXI主机的部分服务<br>SSH上去一查，果然</p>
-</li>
-</ol>
+<h2 id="排错步骤"><a href="#排错步骤" class="headerlink" title="排错步骤"></a>排错步骤</h2><p>1、先把SSH/shell服务重新变为可用<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">控制台重启 manager server</div></pre></td></tr></table></figure></p>
+<p>2、但第二个问题诞生了，正在 此ESXI 主机上运行的虚拟机在 VC 上变成无效了 ，状态为未知<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SSH上去，使用 esxtop 查看虚拟机是正在运行的</div><div class="line">出现这种情况是因为重启管理服务之后</div><div class="line">HOSTD、VXPD服务起来之后无法读取到正在运行的虚机的VMX文件，无法读取配置文件。</div><div class="line">需要命令行迁移VM（测试过不行）或者重新启动VM。</div><div class="line">让VMX变为可读状态，hostd服务才能正确读取到虚机配置。</div></pre></td></tr></table></figure></p>
+<p>3、翻 <a href="https://kb.vmware.com/selfservice/microsites/search.do?cmd=displayKC&amp;docType=kc&amp;externalId=2083312&amp;sliceId=1&amp;docTypeID=DT_KB_1_1&amp;dialogID=584477504&amp;stateId=1%200%20485256400" target="_blank" rel="external">KB2083312</a>  找到了一个答案，解释了TRP文件过多，影响了ESXI主机的部分服务<br>SSH上去一查，果然</p>
 <p><img src="https://pek3a.qingstor.com/mynotes/esxi-ts-001.png" alt="image"></p>
-<ol>
-<li>通过运行以下命令删除 /var/spool/snmp/ 目录中的 .trp 文件：<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> cd /var/spool/snmp</div><div class="line"><span class="meta">#</span> for i in $(ls | grep trp); do rm -f $i;done</div></pre></td></tr></table></figure>
-</li>
-</ol>
+<p>4、通过运行以下命令删除 /var/spool/snmp/ 目录中的 .trp 文件：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> cd /var/spool/snmp</div><div class="line"><span class="meta">#</span> for i in $(ls | grep trp); do rm -f $i;done</div></pre></td></tr></table></figure></p>
 <p>要确保此问题不会重复发生，可暂时禁用 snmpd 以停止日志记录。要停止 snmpd 服务，请运行以下命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> /etc/init.d/snmpd stop</div></pre></td></tr></table></figure></p>
-<p>官方建议停止 snmpd 这个服务，但是TRP文件依然增长，<br>启用后，TRP文件却停止增长了。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">snmpd is running</div><div class="line"><span class="meta">#</span> /etc/init.d/snmpd start</div></pre></td></tr></table></figure></p>
-<ol>
-<li>因为 trp 文件过多，所以对 ESXI 主机的服务状态进行维护变更会失败，现在清理完了，重新的把主要的服务 hostd 启动<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/hostd status </div><div class="line">/etc/init.d/hostd start</div></pre></td></tr></table></figure>
-</li>
-</ol>
+<p>官方建议停止SNMPD这个服务，但是TRP文件依然增长，<br>启用后，TRP文件却停止增长了。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">snmpd is running</div><div class="line"><span class="meta">#</span> /etc/init.d/snmpd start</div></pre></td></tr></table></figure></p>
+<p>5、因为 trp 文件过多，所以对 ESXI 主机的服务状态进行维护变更会失败，现在清理完了，重新的把主要的服务 hostd 启动<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/hostd status </div><div class="line">/etc/init.d/hostd start</div></pre></td></tr></table></figure></p>
 <p>Restart重启服务  start 启动服务</p>
 <p>重启了 hostd 服务后，esxi主机的管理agent会短暂重启一下，并不会影响虚机，使用client重新连接ESXI主机后，hostd 能正确读取到正在运行的虚机状态。</p>
 <p>另外如果资源池与虚拟机的目录关系有异常，把 vxpa 的服务也重新启动一下吧<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/vpxa restart</div></pre></td></tr></table></figure></p>
@@ -475,9 +462,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ESXi/" rel="tag"># ESXi</a>
-          
             <a href="/tags/排障/" rel="tag"># 排障</a>
+          
+            <a href="/tags/ESXI/" rel="tag"># ESXI</a>
           
         </div>
       
@@ -490,8 +477,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/07/05/esxi-cmd-ops/" rel="next" title="vSphere运维的一些命令">
-                <i class="fa fa-chevron-left"></i> vSphere运维的一些命令
+              <a href="/2015/11/06/VM-FILE-LOCK-TS01/" rel="next" title="分析虚拟机文件会被 HA 锁-案列">
+                <i class="fa fa-chevron-left"></i> 分析虚拟机文件会被 HA 锁-案列
               </a>
             
           </div>
@@ -605,7 +592,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -616,7 +603,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -627,7 +614,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

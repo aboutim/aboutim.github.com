@@ -385,8 +385,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VMware运维/" itemprop="url" rel="index">
-                    <span itemprop="name">VMware运维</span>
+                  <a href="/categories/VMWare运维/" itemprop="url" rel="index">
+                    <span itemprop="name">VMWare运维</span>
                   </a>
                 </span>
 
@@ -436,16 +436,171 @@
         
           
           故障信息对象：ESXI 主机现象：虚拟机无法正常开机，正在运行的虚拟机无法迁移到别的主机，SSH/shell服务挂死、重启启动失败。尽量不能直接重启ESXI主机，会中断正在运行的虚拟机
-排错步骤
-先把SSH/shell服务重新变为可用
-1控制台重启 manager server
-
-但第二个问题诞生了，正在 此ESXI 主机上运行的虚拟机在 VC 上变成无效了 ，状态为未知
-12345SSH上去，使
+排错步骤1、先把SSH/shell服务重新变为可用1控制台重启 manager server
+2、但第二个问题诞生了，正在 此ESXI 主机上运行的虚拟机在 VC 上变成无效了 ，状态为未知12345SSH上去，使
           ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2015/11/11/esxi-Troubleshooting-svc-donowork/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/11/06/VM-FILE-LOCK-TS01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TIM">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/site_ico.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TIM Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/11/06/VM-FILE-LOCK-TS01/" itemprop="url">分析虚拟机文件会被 HA 锁-案列</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-06T11:37:43+00:00">
+                2015-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/VMware运维/" itemprop="url" rel="index">
+                    <span itemprop="name">VMware运维</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2015/11/06/VM-FILE-LOCK-TS01/" class="leancloud_visitors" data-flag-title="分析虚拟机文件会被 HA 锁-案列">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          之前发生过集群中的有个ESXi与某个 Datastore ，导致虚拟机卡死宕机了，然后无法强制关机，通过命令杀死虚拟机后。提示找不到虚拟机文件，无法启动，去 Datastore 对应的虚拟机目录看，虚拟机 vmx 配置文件是无图标的，即锁定状态。无法 ESXI 被读取到。因此需要解锁，解锁要找到谁上锁，排障的过程搜索过资料和与官方工程师讨论后决定从虚拟机清单中移除虚拟机，手动删除去 Datasto
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/11/06/VM-FILE-LOCK-TS01/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -600,21 +755,10 @@
       
         
           
-          命令行取消正在运行的任务
-SSH ESXi
-执行一下命令查询当前任务列表
-1#vim-cmd vimsvc/task_list
-
-查看任务具体细节 “xxxxx” 代表任务ID
-1#vim-cmd vimsvc/task_info xxxxx
-
-确认之后，执行以下命令取消任务
-1#vim-cmd vimsvc/task_cancel xxxxx
-
-
-命令行杀死虚拟机
-SSH ESXi
-输入 esx
+          命令行取消正在运行的任务1、SSH ESXi2、执行一下命令查询当前任务列表1#vim-cmd vimsvc/task_list
+3、查看任务具体细节 “xxxxx” 代表任务ID1#vim-cmd vimsvc/task_info xxxxx
+4、确认之后，执行以下命令取消任务1#vim-cmd vimsvc/task_cancel xxxxx
+命令行杀死虚拟机1、SSH ESXi2、输入 es
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1029,7 +1173,7 @@ IDC基础设施：数据中心、机房机柜、服务器设备
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1040,7 +1184,7 @@ IDC基础设施：数据中心、机房机柜、服务器设备
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1051,7 +1195,7 @@ IDC基础设施：数据中心、机房机柜、服务器设备
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
