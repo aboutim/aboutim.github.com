@@ -101,7 +101,7 @@
 <meta name="description" content="黎明之前最黑暗">
 <meta property="og:type" content="website">
 <meta property="og:title" content="TIM Blog">
-<meta property="og:url" content="http://yoursite.com/categories/VMware运维/index.html">
+<meta property="og:url" content="http://yoursite.com/categories/VMWare运维/index.html">
 <meta property="og:site_name" content="TIM Blog">
 <meta property="og:description" content="黎明之前最黑暗">
 <meta property="og:locale" content="zh-Hans">
@@ -136,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/VMware运维/"/>
+  <link rel="canonical" href="http://yoursite.com/categories/VMWare运维/"/>
 
 
 
 
 
-  <title>分类: VMware运维 | TIM Blog</title>
+  <title>分类: VMWare运维 | TIM Blog</title>
   
 
 
@@ -322,7 +322,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>VMware运维<small>分类</small>
+        <h1>VMWare运维<small>分类</small>
         </h1>
       </div>
 
@@ -334,37 +334,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2015/12/07/vm-space-reclaim-disk-vmdk/" itemprop="url">
+            <a class="post-title-link" href="/2015/11/11/esxi-Troubleshooting-svc-donowork/" itemprop="url">
               
-                <span itemprop="name">虚拟机释放磁盘空间</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-12-07T15:59:54+00:00"
-              content="2015-12-07" >
-          12-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2015/11/06/VM-FILE-LOCK-TS01/" itemprop="url">
-              
-                <span itemprop="name">分析虚拟机文件会被 HA 锁-案列</span>
+                <span itemprop="name">故障排错-ESXI-VM无法启动以及迁移且SSH/shell服务无法启动</span>
               
             </a>
         
@@ -372,37 +344,9 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2015-11-06T11:37:43+00:00"
-              content="2015-11-06" >
-          11-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2015/07/05/esxi-cmd-ops/" itemprop="url">
-              
-                <span itemprop="name">vSphere运维的一些命令</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-07-05T15:21:36+00:00"
-              content="2015-07-05" >
-          07-05
+              datetime="2015-11-11T11:09:11+00:00"
+              content="2015-11-11" >
+          11-11
         </time>
       </div>
 
@@ -462,7 +406,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -484,7 +428,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1046,6 +990,81 @@
             counter.save(null, {
               success: function(counter) {
                 var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
+          var $element = $(document.getElementById(url));
                 $element.find('.leancloud-visitors-count').text(counter.get('time'));
               },
               error: function(counter, error) {
